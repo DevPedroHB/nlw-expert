@@ -4,19 +4,25 @@ import { useCartStore } from "@/stores/cart-store";
 import { PRODUCTS } from "@/utils/data/products";
 import { formatCurrency } from "@/utils/functions/format-currency";
 import { Feather } from "@expo/vector-icons";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { Redirect, useLocalSearchParams, useNavigation } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 export default function Product() {
   const { id } = useLocalSearchParams();
   const { add } = useCartStore();
   const navigation = useNavigation();
-  const product = PRODUCTS.filter((product) => product.id === id)[0];
+  const product = PRODUCTS.find((product) => product.id === id);
 
   function handleAddToCart() {
-    add(product);
+    if (product) {
+      add(product);
 
-    navigation.goBack();
+      navigation.goBack();
+    }
+  }
+
+  if (!product) {
+    return <Redirect href="/" />;
   }
 
   return (
@@ -27,6 +33,7 @@ export default function Product() {
         resizeMode="cover"
       />
       <View className="mt-8 flex-1 p-5">
+        <Text className="font-heading text-xl text-white">{product.title}</Text>
         <Text className="my-2 font-heading text-2xl text-lime-400">
           {formatCurrency(product.price)}
         </Text>
