@@ -13,6 +13,7 @@
     "@mermaid-js/mermaid-cli": "^10.7.0",
     "@pedrohb/eslint-config": "^1.1.0",
     "@types/node": "^20.11.16",
+    "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
     "prisma": "^5.9.1",
     "prisma-erd-generator": "^1.11.2",
@@ -21,8 +22,10 @@
   },
   "dependencies": {
     "@fastify/cookie": "^9.3.1",
+    "@fastify/websocket": "^8.3.1",
     "@prisma/client": "5.9.1",
     "fastify": "^4.26.0",
+    "ioredis": "^5.3.2",
     "zod": "^3.22.4"
   }
 }
